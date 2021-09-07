@@ -17,8 +17,8 @@ void uncoverTile(int xpos, int ypos) {
     }
     gameLost = true;
   }
+  if(!boardUncovered[xpos][ypos]) num_uncovered++;
   boardUncovered[xpos][ypos] = true;
-  num_uncovered ++;
   if (boardNeighbours[xpos][ypos] == 0) {
     // no neighbours means uncover every neighbour (since its impossible to be a mine)
     for (int i=-1; i<2; i++) {
