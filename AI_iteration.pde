@@ -1,4 +1,6 @@
 void AI_iteration() {
+  boolean changes_made = false;
+  AI_sum_probs_mode = false;
   // if on first click, uncover the center tile
   if (firstClick) {
     uncoverTile(resolutionX/2, resolutionY/2);
@@ -53,7 +55,10 @@ void AI_iteration() {
         for (int k = -1; k<2; k++) {
           if (tile[0]+j >= 0 && tile[0]+j < resolutionX && tile[1]+k >= 0 && tile[1]+k < resolutionY) {
             if (!boardUncovered[tile[0]+j][tile[1]+k]) {
-              if (!boardFlagged[tile[0]+j][tile[1]+k]) flagTile(tile[0]+j, tile[1]+k);
+              if (!boardFlagged[tile[0]+j][tile[1]+k]){ 
+                flagTile(tile[0]+j, tile[1]+k);
+                changes_made = true;
+              }
             }
           }
         }
@@ -64,12 +69,18 @@ void AI_iteration() {
       for (int j=-1; j<2; j++) {
         for (int k = -1; k<2; k++) {
           if (tile[0]+j >= 0 && tile[0]+j < resolutionX && tile[1]+k >= 0 && tile[1]+k < resolutionY) {
-            if (!boardFlagged[tile[0]+j][tile[1]+k] && boardUncovered[tile[0]+j][tile[1]+k]) {
+            if (!boardFlagged[tile[0]+j][tile[1]+k] && !boardUncovered[tile[0]+j][tile[1]+k]) {
               uncoverTile(tile[0]+j, tile[1]+k);
+              changes_made = true;
             }
           }
         }
       }
     }
+  }
+  if(!changes_made) AI_sum_probs_mode = true;
+  
+  if(AI_sum_probs_mode){
+    
   }
 }

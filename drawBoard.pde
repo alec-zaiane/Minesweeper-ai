@@ -15,7 +15,7 @@ void drawBoard(int[][] neighbours, boolean[][]uncovered, boolean[][] flagged) {
         else if (nbrs == 7) fill(#8a602c);
         else if (nbrs == 8) fill(#9babaa);
       }
-      strokeWeight(1);
+      strokeWeight(0);
       stroke(0);
       rectMode(CORNER);
       rect(i*squareSize, j*squareSize, squareSize, squareSize);
