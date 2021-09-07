@@ -1,23 +1,23 @@
 void uncoverTile(int xpos, int ypos) {
-  if(firstClick){
+  if (firstClick) {
     // if this is the first click of the game, make sure the click is on a tile with 0 neighbouring mines
     println("generating");
-    board = setupBoard(resolutionX,resolutionY,board,num_mines,xpos,ypos,2);
+    board = setupBoard(resolutionX, resolutionY, board, num_mines, xpos, ypos, 2);
     boardNeighbours = calculateBordering(board);
     println("generated");
     firstClick = false;
   }
-  if(boardFlagged[xpos][ypos] && !gameLost && !gameWon) return;
+  if (boardFlagged[xpos][ypos] && !gameLost && !gameWon) return;
   //lose condition
-  if(board[xpos][ypos] == true){
-    if(gameLost == true || gameWon == true){
+  if (board[xpos][ypos] == true) {
+    if (gameLost == true || gameWon == true) {
       // TODO reset game
       println("resetting game");
       return;
     }
     gameLost = true;
   }
-  if(!boardUncovered[xpos][ypos]) num_uncovered++;
+  if (!boardUncovered[xpos][ypos]) num_uncovered++;
   boardUncovered[xpos][ypos] = true;
   if (boardNeighbours[xpos][ypos] == 0) {
     // no neighbours means uncover every neighbour (since its impossible to be a mine)
@@ -32,11 +32,11 @@ void uncoverTile(int xpos, int ypos) {
     }
   }
   // win condition
-  if(resolutionX * resolutionY == num_mines + num_uncovered) {
+  if (resolutionX * resolutionY == num_mines + num_uncovered) {
     gameWon = true;
   }
 }
 
 void flagTile(int xpos, int ypos) {
-  if(!boardUncovered[xpos][ypos]) boardFlagged[xpos][ypos] = !boardFlagged[xpos][ypos];
+  if (!boardUncovered[xpos][ypos]) boardFlagged[xpos][ypos] = !boardFlagged[xpos][ypos];
 }
