@@ -80,7 +80,7 @@ void AI_iteration() {
   }
   if (!changes_made) AI_sum_probs_mode = true;
 
-  if (AI_sum_probs_mode) {
+  if (AI_sum_probs_mode && AI_guesses) {
     println("Guessing mode:");
     // Create a new grid holding the probability of a mine being in that location
     float[][] mineProbs = new float[resolutionX][resolutionY];
@@ -133,6 +133,10 @@ void AI_iteration() {
     boolean uncoveredZero = false;
     for (int i=0; i<mineProbs.length; i++) {
       for (int j=0; j<mineProbs[0].length; j++) {
+        if(analyzed[i][j] && mineProbs[i][j] == 0){
+          uncoverTile(i,j);
+          uncoveredZero = true;
+        }
         if (analyzed[i][j] && mineProbs[i][j] < lowestProb && mineProbs[i][j] != 0) {
           lowestProbCoords[0] = i;
           lowestProbCoords[1] = j;
@@ -142,6 +146,8 @@ void AI_iteration() {
     }
     if (!uncoveredZero) {
       if (lowestProbCoords[0] != -1) {
+        //TODO find out why probability can be negative
+        //      LowestProb has to be > 1?
         println("AI guessing, "+((1.0-lowestProb)*100.0)+"% chance of success");
         game_ai_success_chance *= 1.0-lowestProb;
         println(game_ai_success_chance*100.0+"% chance to have gotten this far");

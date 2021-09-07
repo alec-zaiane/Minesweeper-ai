@@ -13,4 +13,8 @@ void keyPressed() {
     AI_active = !AI_active;
     println("AI active: "+AI_active);
   }
+  if (key == 'g') {
+    AI_guesses = !AI_guesses;
+    println("Ai guesses: "+AI_guesses);
+  }
 }

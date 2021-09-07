@@ -1,6 +1,6 @@
-int resolutionX = 40;
-int resolutionY = 40;
-int squareSize = 15;
+int resolutionX = 150;
+int resolutionY = 80;
+int squareSize = 12;
 int num_mines = 80;
 
 int num_uncovered = 0;
@@ -17,6 +17,7 @@ boolean gameLost = false;
 //AI variables
 boolean AI_active = false;
 boolean AI_sum_probs_mode = false;
+boolean AI_guesses = false;
 float game_ai_success_chance = 1.0;
 
 
@@ -24,7 +25,7 @@ void settings() {
   size(resolutionX*squareSize, resolutionY*squareSize);
 }
 void setup() {
-  frameRate(10);
+  //frameRate(10);
   num_mines = int(resolutionX*resolutionY/5.8125);
   board = setupBoard(resolutionX, resolutionY, board, num_mines, 0, 0, 0);
   boardNeighbours = calculateBordering(board);
