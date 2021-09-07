@@ -17,6 +17,7 @@ boolean gameLost = false;
 //AI variables
 boolean AI_active = false;
 boolean AI_sum_probs_mode = false;
+float game_ai_success_chance = 1.0;
 
 
 void settings() {
@@ -31,7 +32,7 @@ void setup() {
 
 
 void draw() {
-  if (AI_active) AI_iteration();
+  if (AI_active && !gameWon && !gameLost) AI_iteration();
   drawBoard(boardNeighbours, boardUncovered, boardFlagged);
   if (gameWon && !gameLost) {
     fill(2, 227, 21, 128);

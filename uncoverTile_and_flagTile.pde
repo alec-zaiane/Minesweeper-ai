@@ -12,7 +12,7 @@ void uncoverTile(int xpos, int ypos) {
   if (board[xpos][ypos] == true) {
     if (gameLost == true || gameWon == true) {
       // TODO reset game
-      println("resetting game");
+      //println("resetting game");
       return;
     }
     gameLost = true;
