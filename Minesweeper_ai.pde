@@ -27,6 +27,7 @@ void setup(){
 
 
 void draw(){
+  if(AI_active) AI_iteration();
   drawBoard(boardNeighbours,boardUncovered,boardFlagged);
   if(gameWon && !gameLost){
     fill(2,227,21,128);
